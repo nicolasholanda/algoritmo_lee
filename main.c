@@ -2,13 +2,16 @@
 #include <stdlib.h>
 #include "queue.h"
 
+/* Número de linhas do labirinto */
 #define N 10
+/* Número de colunas do labirinto */
 #define M 10
 
 /* Maior valor que um int pode guardar */
 #define INT_MAX 2147483647
 
-/* Todas as combinações de movimentos possíveis (cima, baixo, esquerda e direita). */
+/* Todas as combinações de movimentos possíveis:
+ * esquerda, cima, baixo e direita, respectivamente). */
 int row[] = { -1, 0, 0, 1 };
 int col[] = { 0, -1, 1, 0 };
 
@@ -82,6 +85,8 @@ void lee_maze_solver(int mat[][N], int i, int j, int x, int y) {
 }
 
 int main() {
+    /* Os elementos que tem 1 representam células válidas;
+     * Os que tem 0 representam células inválidas. */
     int mat[M][N] =
 	{
 		{ 1, 1, 1, 1, 1, 0, 0, 1, 1, 1 },
