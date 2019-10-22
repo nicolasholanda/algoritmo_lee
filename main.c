@@ -1,41 +1,41 @@
 /****************************************************************************
  *                      ALGORITMO DE LEE (MAZE ROUTER)                      *
  ****************************************************************************
- * O algoritmo de Lee È uma possÌvel soluÁ„o para problemas de roteamento   *
+ * O algoritmo de Lee √© uma poss√≠vel solu√ß√£o para problemas de roteamento   *
  * de labirinto com base na busca em largura.                               *
  *                                                                          *
- * Entrada: Uma matriz MxN de 0 e 1 quer epresenta um labirinto,            *
- * onde dÌgitos 0 s„o barreiras e dÌgitos 1 s„o cÈlulas disponÌveis.        *
- * Uma cÈlula origem (i, j) e uma cÈlula destino (x, y)                     *
+ * Entrada: Uma matriz MxN de 0 e 1 que representa um labirinto,            *
+ * onde d√≠gitos 0's s√£o barreiras e d√≠gitos 1's s√£o c√©lulas dispon√≠veis.    *
+ * Uma c√©lula origem (i, j) e uma c√©lula destino (x, y)                     *
  *                                                                          *
- * SaÌda: O custo da menor rota entre a origem e o destino, caso exista.    *
- * Caso n„o exista, o algoritmo indicar·.                                   *
+ * Sa√≠da: O custo da menor rota entre a origem e o destino, caso exista.    *
+ * Caso n√£o exista, o algoritmo indicar√°.                                   *
  *                                                                          *
  * Complexidade Temporal e Espacial: O(MN)                                  *
  *                                                                          *
- * ReferÍncia: www.techiedelight.com/lee-algorithm-shortest-path-in-a-maze/ *
+ * Refer√™ncia: www.techiedelight.com/lee-algorithm-shortest-path-in-a-maze/ *
  ****************************************************************************/
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "queue.h"
 
-/* N˙mero de colunas do labirinto */
+/* N√∫mero de colunas do labirinto */
 #define N 10
-/* N˙mero de linhas do labirinto */
+/* N√∫mero de linhas do labirinto */
 #define M 10
 
 /* Maior valor que um int pode guardar */
 #define INT_MAX 2147483647
 
-/* Todas as combinaÁıes de movimentos possÌveis:
+/* Todas as combina√ß√µes de movimentos poss√≠veis:
  * esquerda, cima, baixo e direita, respectivamente). */
 int row[] = { -1, 0, 0, 1 };
 int col[] = { 0, -1, 1, 0 };
 
 
-/* Retorna 1 se a posiÁ„o (row, col) È 1 e n„o foi visitada;
- * retorna 0 caso contr·rio. */
+/* Retorna 1 se a posi√ß√£o (row, col) √© 1 e n√£o foi visitada;
+ * retorna 0 caso contr√°rio. */
 int isValid(int mat[][N], int visited[][N], int row, int col) {
 	return (row >= 0) && (row < M) && (col >= 0) && (col < N)
 		&& mat[row][col] && !visited[row][col];
@@ -51,7 +51,7 @@ void initialize_array(int arr[][N]) {
 }
 
 
-/* Devolve o menor caminho de (i,j) atÈ (x,y)*/
+/* Devolve o menor caminho de (i,j) at√© (x,y)*/
 void lee_maze_solver(int mat[][N], int i, int j, int x, int y) {
     /* Criando array de visitados e o inicializando*/
     int visited[M][N];
@@ -62,7 +62,7 @@ void lee_maze_solver(int mat[][N], int i, int j, int x, int y) {
 	int head, tail;
     init(&head,&tail);
 
-    /* Marcando o nÛ inicial como visitado e inserindo ele na fila */
+    /* Marcando o n√≥ inicial como visitado e inserindo ele na fila */
     visited[i][j] = 1;
     Node source = {.x = i, .y = j, .dist = 0};
     enqueue(q, &tail, source);
@@ -70,9 +70,9 @@ void lee_maze_solver(int mat[][N], int i, int j, int x, int y) {
     /* Armazena o caminho mais longo da origem para o destino */
     int min_dist = INT_MAX;
 
-    /* Enquanto a fila n„o estiver vazia */
+    /* Enquanto a fila n√£o estiver vazia */
     while(!empty(head, tail)) {
-        /* Processa o prÛximo nÛ da fila */
+        /* Processa o pr√≥ximo n√≥ da fila */
         Node node = dequeue(q, &head);
         int i = node.x, j = node.y, dist = node.dist;
 
@@ -83,11 +83,11 @@ void lee_maze_solver(int mat[][N], int i, int j, int x, int y) {
             break;
         }
 
-        /* Analisa as quatro movimentaÁıes possÌveis e empilha cada movimento v·lido */
+        /* Analisa as quatro movimenta√ß√µes poss√≠veis e empilha cada movimento v√°lido */
         for(int k = 0; k < 4; k++) {
-            /* Se for possÌvel ir da posiÁ„o atual para a posiÁ„o (i + row[k], j + col[k])*/
+            /* Se for poss√≠vel ir da posi√ß√£o atual para a posi√ß√£o (i + row[k], j + col[k])*/
             if(isValid(mat, visited, i + row[k], j + col[k])) {
-                /* Marque a cÈlula como v·lida e empilhe ela */
+                /* Marque a c√©lula como v√°lida e empilhe ela */
                 Node element = {.x = i + row[k], .y = j + col[k], .dist = dist + 1};
                 visited[i + row[k]][j + col[k]] = 1;
                 enqueue(q, &tail, element);
@@ -103,8 +103,8 @@ void lee_maze_solver(int mat[][N], int i, int j, int x, int y) {
 }
 
 int main() {
-    /* Os elementos que tem 1 representam cÈlulas v·lidas;
-     * Os que tem 0 representam cÈlulas inv·lidas. */
+    /* Os elementos que tem 1 representam c√©lulas v√°lidas;
+     * Os que tem 0 representam c√©lulas inv√°lidas. */
     int mat[M][N] =
 	{
 		{ 1, 1, 1, 1, 1, 0, 0, 1, 1, 1 },
