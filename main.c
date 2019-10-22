@@ -1,10 +1,28 @@
+/****************************************************************************
+ *                      ALGORITMO DE LEE (MAZE ROUTER)                      *
+ ****************************************************************************
+ * O algoritmo de Lee é uma possível solução para problemas de roteamento   *
+ * de labirinto com base na busca em largura.                               *
+ *                                                                          *
+ * Entrada: Uma matriz MxN de 0 e 1 quer epresenta um labirinto,            *
+ * onde dígitos 0 são barreiras e dígitos 1 são células disponíveis.        *
+ * Uma célula origem (i, j) e uma célula destino (x, y)                     *
+ *                                                                          *
+ * Saída: O custo da menor rota entre a origem e o destino, caso exista.    *
+ * Caso não exista, o algoritmo indicará.                                   *
+ *                                                                          *
+ * Complexidade Temporal e Espacial: O(MN)                                  *
+ *                                                                          *
+ * Referência: www.techiedelight.com/lee-algorithm-shortest-path-in-a-maze/ *
+ ****************************************************************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "queue.h"
 
-/* Número de linhas do labirinto */
-#define N 10
 /* Número de colunas do labirinto */
+#define N 10
+/* Número de linhas do labirinto */
 #define M 10
 
 /* Maior valor que um int pode guardar */
@@ -24,9 +42,9 @@ int isValid(int mat[][N], int visited[][N], int row, int col) {
 }
 
 /* Recebe uma matriz e seta todos os elementos para 0 */
-void initialize_array(int arr[N][M]) {
-  for(int i = 0; i < N; i++) {
-    for(int j = 0; j < M; j++) {
+void initialize_array(int arr[][N]) {
+  for(int i = 0; i < M; i++) {
+    for(int j = 0; j < N; j++) {
         arr[i][j] = 0;
     }
   }
