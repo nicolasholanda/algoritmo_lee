@@ -9,3 +9,6 @@ Entrada:
 Saída:
 * O tamanho do menor caminho entre os dois pontos, caso seja possível chegar até lá.
 * Caso não seja possível, o algoritmo devolverá um texto indicando que não é possível sair de (x, y) e chegar em (i, j).
+
+Como compilar e rodar:
+* Rode no terminal <code>gcc queue.c main.c -o lee && ./lee</code>
